@@ -106,3 +106,58 @@ using namespace std;
 //	BlackWhiteImg(img);
 //}
 
+
+////////// Bluring Algo ///////////
+int main() 
+{
+	string path = "D:/OpenCV-Cours/test.jpg";
+	Mat img = imread(path);
+	Mat imgBlur;
+
+	for (int i = 0; img.size[1] - 2; i++) 
+	{
+		for (int j = 0; img.size[0] - 2; j++) 
+		{
+			
+			for (int a = 1; 3; a++) 
+			{
+				for (int b = 1; 3; b++)
+				{
+					img.at<cv::Vec3b>(j + 1, i + 1).val[0] = produitDeCoonvolution(i, j, img, 0);
+					img.at<cv::Vec3b>(j + 1, i + 1).val[1] = produitDeCoonvolution(i, j, img, 1);
+					img.at<cv::Vec3b>(j + 1, i + 1).val[2] = produitDeCoonvolution(i, j, img, 2);
+
+				}
+			}
+		}
+
+	}
+	imshow("image de base", img);
+	imshow("image floutée", imgBlur);
+
+	waitKey(0);
+
+}
+
+float produitDeCoonvolution(int i, int j, Mat im, int index)
+{
+	float result = 0; 
+	for (int a = 0; 3; a++) 
+	{
+		for (int b = 0; 3; b++) 
+		{
+			result = result + im.at<cv::Vec3b>(b + j, a + i).val[index];
+		}
+	}
+	return result/9;
+}
+
+///////// Canny (détection de contours) ///////
+
+
+
+//////// Dilation ////////////
+
+
+
+//////// Erosion /////////
